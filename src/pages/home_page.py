@@ -4,6 +4,7 @@ from seleniumpagefactory.Pagefactory import PageFactory
 class Homepage(PageFactory):
     def __init__(self, driver):
         self.driver = driver
+        self.base_url = "https://bstackdemo.com/"
 
     locators = {
         "sign_in": ("ID", "signin"),
