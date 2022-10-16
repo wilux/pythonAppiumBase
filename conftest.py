@@ -27,6 +27,7 @@ def browser(request):
 # Setup webdriver for different browsers
 @pytest.fixture(scope="session")
 def driver(browser):
+    print("Preparing browser: " + browser)
     if browser == "chrome":
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
@@ -38,7 +39,7 @@ def driver(browser):
 
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     driver.maximize_window()
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(1)
     yield driver
     driver.quit()
 
