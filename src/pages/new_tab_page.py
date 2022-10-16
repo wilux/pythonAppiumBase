@@ -13,11 +13,13 @@ class NewTabPage(PageFactory):
 
     locators = {
         "view_all_courses_button": ("XPATH", "//a[.='VIEW ALL COURSES']"),
-        "preloaded_off": ("XPATH", "//div[@class='preloader'][contains(@style,'display: none')]"),
+        "preloaded_off": ("XPATH", "//div[@class='preloader'][contains(@style,'display: none')]")
     }
 
     def get_paragraph_text(self, order):
-        return self.driver.find_element_by_css(".price-title div:nth-of-type(2) li:nth-of-type(" + order + ")").text
+        element = ".price-title div:nth-of-type(2) li:nth-of-type(" + order + ")"
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, element)))
+        return self.driver.find_element(By.find_element_by_css, element).text
 
     def wait_preload_off(self):
-        self.wait.until(EC.presence_of_element_located(self.preloaded_off))
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='preloader'][contains(@style,'display: none')]")))

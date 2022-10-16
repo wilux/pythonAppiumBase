@@ -8,7 +8,6 @@ class NewWindowPage(PageFactory):
     def __init__(self, driver):
         self.driver = driver
         self.url = "http://www.qaclickacademy.com/"
-        self.wait = WebDriverWait(self, timeout=10)
 
     locators = {
         "countries_input": ("XPATH", "//input[@id='autocomplete']"),
