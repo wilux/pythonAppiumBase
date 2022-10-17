@@ -1,3 +1,7 @@
+**Install Requirements**
+
+ pip3 install -r requirements.txt 
+
 **Run with:**
 
 pytest -v --browser=firefox --html=Reports/Report.html  --self-contained-html
