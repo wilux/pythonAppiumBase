@@ -125,8 +125,9 @@ def test_alert_msg_text(driver):
     homepage.alert_input.send_keys("Stori Card")
     homepage.alert_button.click()
     alert = Alert(driver)
-    assert alert.text == "Hello Stori Card, Are you sure you want to confirm?"
+    msg = alert.text
     alert.accept()
+    assert msg == "Hello Stori Card, Are you sure you want to confirm?"
 
 
 def test_print_courses_by_price(driver):

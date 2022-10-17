@@ -35,7 +35,8 @@ class Homepage(PageFactory):
 
     def get_coursers_by_price(self, price):
         labels_list = []
-        table_body = self.driver.find_element(By.XPATH, "//table[@name='courses']/tbody")
+        table_body = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//table[@name='courses']/tbody")))
         entries = table_body.find_elements(By.TAG_NAME, 'tr')
         for i in range(1, len(entries)):
             n = str(i + 1)
@@ -57,5 +58,4 @@ class Homepage(PageFactory):
             name = self.driver.find_element(By.XPATH,
                                             "//fieldset[contains(.,'Web Table Fixed header')]//table[@id='product']/tbody[1]/tr[" + n + "]/td[1]")
             labels_list.append(name.text)
-            # print(name.text)
         return labels_list
