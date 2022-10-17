@@ -16,7 +16,6 @@ def test_suggestion_countries(driver):
     homepage = Homepage(driver)
     homepage.countries_input.send_keys("Me")
     homepage.select_country_by_text("Mexico")
-    print("TEST")
     print(homepage.countries_input.get_attribute("value"))
     assert homepage.countries_input.get_attribute("value") == "Mexico"
 
