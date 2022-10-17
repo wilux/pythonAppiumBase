@@ -17,9 +17,10 @@ class NewTabPage(PageFactory):
     }
 
     def get_paragraph_text(self, order):
-        element = ".price-title div:nth-of-type(2) li:nth-of-type(" + order + ")"
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, element)))
-        return self.driver.find_element(By.find_element_by_css, element).text
+        element = ".price-title div:nth-of-type(2) li:nth-of-type(" + str(order) + ")"
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, element)))
+        return self.driver.find_element(By.CSS_SELECTOR, element).text
 
     def wait_preload_off(self):
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='preloader'][contains(@style,'display: none')]")))
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@class='preloader'][contains(@style,'display: none')]")))

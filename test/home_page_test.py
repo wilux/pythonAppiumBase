@@ -1,6 +1,3 @@
-import pytest
-import time
-
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.wait import WebDriverWait
 from src.pages.home_page import Homepage
@@ -130,3 +127,25 @@ def test_alert_msg_text(driver):
     alert = Alert(driver)
     assert alert.text == "Hello Stori Card, Are you sure you want to confirm?"
     alert.accept()
+
+
+def test_print_courses_by_price(driver):
+    homepage = Homepage(driver)
+    count = homepage.get_coursers_by_price("25")
+    print(count)
+    assert len(count) == 4
+
+
+def test_print_engineer_names(driver):
+    homepage = Homepage(driver)
+    names = homepage.get_names_engineers()
+    print(names)
+    assert len(names) == 8
+
+
+def test_text_mentorship_paragraph(driver):
+    homepage = Homepage(driver)
+    new_tab_page = NewTabPage(driver)
+    driver.switch_to.frame(homepage.courses_iframe)
+    text_paragraph = new_tab_page.get_paragraph_text(2)
+    assert text_paragraph == "His mentorship program is most after in the software testing community with long waiting period."

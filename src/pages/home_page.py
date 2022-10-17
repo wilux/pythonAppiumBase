@@ -17,8 +17,8 @@ class Homepage(PageFactory):
         "open_tab_button": ("XPATH", "//a[@id='opentab']"),
         "alert_input": ("XPATH", "//input[@id='name']"),
         "alert_button": ("XPATH", "//input[@id='alertbtn']"),
-        "courses_table": ("//table[@name='courses']/tbody[1]/tr"),
-        "fixed_table": ("//fieldset[contains(.,'Web Table Fixed header')]//table[@id='product']/tbody[1]/tr"),
+        "courses_table": ("XPATH", "//table[@name='courses']/tbody[1]/tr"),
+        "fixed_table": ("XPATH", "//fieldset[contains(.,'Web Table Fixed header')]//table[@id='product']/tbody[1]/tr"),
         "courses_iframe": ("CSS", "#courses-iframe")
     }
 
@@ -35,23 +35,27 @@ class Homepage(PageFactory):
 
     def get_coursers_by_price(self, price):
         labels_list = []
-        for n in self.fet_coursers_by_price.size:
-            try:
-                name = self.driver.find_element(By.XPATH, "//table[@id='product']/tbody[1]/tr[" + n + "]/td[3]")
-                if name.text == price:
-                    print_name = self.driver.find_element(By.XPATH,
-                                                          "//table[@name='courses']/tbody[1]/tr[" + n + "]/td[2]").text
-                    labels_list.append(print_name)
-                    print(print_name)
-            finally:
-                print("An exception occurred")
-            return labels_list
+        table_body = self.driver.find_element(By.XPATH, "//table[@name='courses']/tbody")
+        entries = table_body.find_elements(By.TAG_NAME, 'tr')
+        for i in range(1, len(entries)):
+            n = str(i + 1)
+            col_price = self.driver.find_element(By.XPATH,
+                                                 "//table[@name='courses']/tbody[1]/tr[" + n + "]/td[3]")
+            if price in col_price.text:
+                course_name = self.driver.find_element(By.XPATH,
+                                                       "//table[@name='courses']/tbody[1]/tr[" + n + "]/td[2]")
+                labels_list.append(course_name.text)
+        return labels_list
 
     def get_names_engineers(self):
         labels_list = []
-        for n in self.fet_coursers_by_price.size:
+        table_body = self.driver.find_element(By.XPATH,
+                                              "//fieldset[contains(.,'Web Table Fixed header')]//table[@id='product']/tbody")
+        entries = table_body.find_elements(By.TAG_NAME, 'tr')
+        for i in range(1, len(entries)):
+            n = str(i + 1)
             name = self.driver.find_element(By.XPATH,
                                             "//fieldset[contains(.,'Web Table Fixed header')]//table[@id='product']/tbody[1]/tr[" + n + "]/td[1]")
-            labels_list.append(name)
-            print(name)
-            return labels_list
+            labels_list.append(name.text)
+            # print(name.text)
+        return labels_list
