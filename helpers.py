@@ -20,7 +20,7 @@ ANDROID_BASE_CAPS = {
     'appPackage': 'com.poincenot.bpn.mobile.qa',
     'appActivity': 'com.poincenot.doit.controller.activity.SplashActivity',
     'autoGrantPermissions': 'true',
-    'disableWindowAnimation': 'true'
+    'disableWindowAnimation': 'true',
 
 }
 
