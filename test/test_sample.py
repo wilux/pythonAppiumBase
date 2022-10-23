@@ -35,12 +35,11 @@ class TestAndroidBasicInteractions():
             driver.quit()
 
         request.addfinalizer(fin)
-
         driver.implicitly_wait(10)
+        driver.update_settings({"waitForIdleTimeout": 100})
         return driver
 
     def test_login(self, driver):
-        driver.update_settings({"waitForIdleTimeout": 100})
         userInput = driver.find_element(By.XPATH, "//*[@resource-id='username_test']")
         passwordInput = driver.find_element(By.XPATH, "//*[@resource-id='password_test']")
         submitButton = driver.find_element(By.XPATH, "//*[@resource-id='testID']")
