@@ -1,4 +1,4 @@
-*Stori QA Automation Engineer Challenge with Python*
+*Appium Base Tests with Python*
 
 **Install Requirements**
 
